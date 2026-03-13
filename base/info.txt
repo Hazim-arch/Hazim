@@ -1,0 +1,67 @@
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│#########################################################################################│
+│-----------------------------------------------------------------------------------------│
+│   ▄▄                                                  ▄▄▄▄    ▄▄▄▄                      │
+│   ██                                                 ██▀▀██ ▄█▀▀▀▀█                     │
+│   ██        ██    ██  ██▄████▄   ▄████▄    ██▄████  ██    ████▄                         │
+│   ██        ██    ██  ██▀   ██  ██▄▄▄▄██   ██▀      ██    ██▀████▄                      │
+│   ██        ██    ██  ██    ██  ██▀▀▀▀▀▀   ██       ██    ██    ▀██                     │
+│   ██▄▄▄▄▄▄  ██▄▄▄███  ██    ██  ▀██▄▄▄▄█   ██        ██▄▄██ █▄▄▄▄▄█▀                    │
+│   ▀▀▀▀▀▀▀▀   ▀▀▀▀ ▀▀  ▀▀    ▀▀    ▀▀▀▀▀    ▀▀         ▀▀▀▀   ▀▀▀▀▀                      │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+
+Name: LunerOS
+version:     
+version name:  
+overviwe: 
+
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│ Feacher list:                                                                           │
+│    1: Lelite                                                                            
+│    2: Rings                                                                              
+│    3: Threed                                                                            │
+│    4: Jupytr                                                                            │
+│    5: Net-ISOing                                                                        │
+│    6: MicroISO                                                                          │
+|    7: HLL (Hpyer Library Linking)
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│ Feacher explanation:                                                                    │
+│    1: Lelite                                                                            │
+|       This is the HAL for the OS                                                        │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│ 2: Rings                                                                                │
+│    This are "versions" that are optimized for a specific thing                          │
+|        Avalibale rings:                                                                 │
+│            1: Devlepor                                                                  │
+|               Focus on memory, speed and productivity                                   |
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+|            2: Gamer                                                                     |
+|               Focus on performence                                                      |
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+|            3: Worker/Emploee                                                            |
+|               Focus on productivity                                                     |
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+| 3: Thread                                                                               |
+|    This is a costom "bash" it replaced the blochy syntex visit the "threed.txt" file    |
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+| 4: Jupytr                                                                               |
+|    A deeply embaded AI this is option and it can only do the followig:                  |
+|       1: Basic I/O                                                                      |
+|       2: Picture genaration                                                             |
+|       3: Video genaration                                                               |
+|       4: Open an app, navagate it (can't change any thing or read from until toled to)  |
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+| 7: Net-ISOing                                                                           |
+|    Basicly a rename of "Just in time booting" visit net-ISOing.txt for more info        |
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+| 8: MicroISO                                                                             |
+|    Compretion algorithem, uses huffman for binary and XZ(lzma) for the rest and is      |
+|    Made in to a file .miso                                                              |
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+| 9:HLL                                                                                  | 
+|    it is a utility for making packages it dose is that if a package uses a library it   |
+|    taks the lib's code that is used an replicate that in a folder "lib"                 |
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+              

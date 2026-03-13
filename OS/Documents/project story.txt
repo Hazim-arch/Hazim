@@ -1,0 +1,384 @@
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│#########################################################################################│
+│-----------------------------------------------------------------------------------------│
+│   ▄▄                                                  ▄▄▄▄    ▄▄▄▄                      │
+│   ██                                                 ██▀▀██ ▄█▀▀▀▀█                     │
+│   ██        ██    ██  ██▄████▄   ▄████▄    ██▄████  ██    ████▄                         │
+│   ██        ██    ██  ██▀   ██  ██▄▄▄▄██   ██▀      ██    ██▀████▄                      │
+│   ██        ██    ██  ██    ██  ██▀▀▀▀▀▀   ██       ██    ██    ▀██                     │
+│   ██▄▄▄▄▄▄  ██▄▄▄███  ██    ██  ▀██▄▄▄▄█   ██        ██▄▄██ █▄▄▄▄▄█▀                    │
+│   ▀▀▀▀▀▀▀▀   ▀▀▀▀ ▀▀  ▀▀    ▀▀    ▀▀▀▀▀    ▀▀         ▀▀▀▀   ▀▀▀▀▀                      │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+                               ┌──────────────────────┐
+                               │ Hello user/devlepor! │
+                               └──────────────────────┘
+GOAL:
+Make an OS that is universal and solve the bloat problum
+
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│ The plan:                                                                               │
+│   1: Make an os that can run on a laptop with intel© celeron and Intel HD 620© graghics │
+│                                                                                         │
+│   2: Make it user frendly and for powers users at the same time with minimal bloat      │
+|                                                                                         |
+|   3: eleminate dependentcy hell and cyber threts such as the XZ backdoor for ssh        |
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+
+                                   ┌──────────────┐
+                                   | Story (main) |
+                                   └──────────────┘
+                                        /────\
+                        /┌───────────────────────────────────┐\
+────────────────────────<┤ Birth of LunerOS-Ceres (0.1) beta ├>───────────────────────────
+                        \└───────────────────────────────────┘/
+                                        \────/
+┌────────╥────────────────~,
+| Part 1 ║ the starting )> ##>-
+└────────╨────────────────────────────────────────────────────────────────────────────────
+
+     I was thinking why not make an OS that is not bloated. I looked at bootOS in a 
+     youtube video. I thought that. I could make it better then. I googled that what is 
+     the most universal OS it should that it was debian (Linux) then i thought i could 
+     make a better one. I dreaw pictures and also made a whole website on paper 
+
+┌────────╥────────────────~,
+| Part 2 ║ the titorial )> ##>-
+└────────╨────────────────────────────────────────────────────────────────────────────────
+
+     I picked C for it i found the best titorial for C first i speedrunned C becuse i 
+     already knew c++. started the titorial. I got the source for binutils and gcc util 
+     the titorial was OSDev
+
+     ┌────────────╥─────────────~,
+     | Sub part 1 ║ C betrail ]> ##>-
+     └────────────╨────────────────────────────────────────────────────────────────────────
+
+          rust a memory safe langouge but it was the same speed. i did'nt bother cuz i 
+          thought i already know C then i remembered that i use gtk with C. i then forgot 
+          about using C for the kernal i insted used rust insred i LOVED it soo much like 
+          the syntax was soo clean no writing static void or void in rust you use fn 
+          nothing else the match statment it was like if case got the rasingan from Naruto
+
+     ┌────────────╥───────────────~,
+     | Sub part 2 ║ Rust kernal ]> ##>-
+     └────────────╨────────────────────────────────────────────────────────────────────────
+
+          becuse rust was a very good langauge i had to give some "info" on it rust itself
+          is a cross comler you do'nt need to get the src for it you just have to tell it 
+          to go no_std (#![no_std]) and no_main (#![no_main])
+
+          now back to the main thing i am writing this when the LunerOS was at Ceres(first 
+          ever version) you can check for it on the git commit: "Ceres (v0.1 beta)" so i 
+          dont have that much info befor that. i also started
+
+┌────────╥────────────~,
+| Part 3 ║ MicroISO )> ##>-
+└────────╨────────────────────────────────────────────────────────────────────────────────
+
+     ┌────────────╥───────────~,
+     | Sub part 1 ║ compressor ]> ##>-
+     └────────────╨────────────────────────────────────────────────────────────────────────
+
+          after i wrouth this till the 2 part i made the directry MicroISO. ranned 
+          python -m venv. then accsadently made directry main.py huffman.py and lzma.py 
+          then i realized that when i was using nvim . then i rm'ed then used touch insted 
+          of mkdir then i edited got some base code from AI besause it had been a year 
+          when i used python last time. i got the lzma code done and then i did is that 
+          insted of adding the places (e.g 1, 10, 100) the all were labeled "U" by VSCode 
+          i googled the top 100 charechters writing a kernal in rust i got a long list i 
+          did the small bits for the most frechuntcharechter i first had a ValueError 
+          becuse python dosent know what is 'wr' in the open() keyword so i turned 
+
+          ┌───────────────────────────────────────────────────────────┐
+          │ with open('self.file', 'wr', encoding='utf-8') as self.f: │
+          └───────────────────────────────────────────────────────────┘
+          to 
+          ┌────────────────────────────────────────────────────────┐
+          │ with open(self.file, 'r', encoding='utf-8') as self.f: │ 
+          └────────────────────────────────────────────────────────┘
+
+          after i got a TypeError wich happend becuse os.path.exist() needs a path as a 
+          perameters but i passed a self.f a TextIOWrapper (this is the format that is 
+          used when you type somthing in the terminal) what i did is set it to a file path 
+          and also add rb to the with open function 
+
+          then ValueError this time it was that input and output operation was used but it 
+          was already closed i changed
+
+          ┌────────────────────────────────────────────────────────┐
+          │ with open(self.file, 'r', encoding='utf-8') as self.f: │ 
+          └────────────────────────────────────────────────────────┘
+          to
+          ┌─────────────────────────────────┐
+          │ with open(self.file_path, 'rb') │
+          └─────────────────────────────────┘
+
+          after that easy fix i got a AttributeError wich was saying that a string object 
+          is passed but dosent have a 'read' function wich you normaly get when you define 
+          a var to an open keyword and gese what i littraly did'nt call i just wrouth run 
+          no () so i added them
+
+          success the compresstion ran with no errors but with bugs the file that was 
+          supped to be created (.miso) was'nt created and the file that was compressed 
+          did'nt have that data it was gone but that was a dummy file so the bug is that 
+          huffman did'nt achually write the compretion i added self.Huffman.
+          processed_chunk to self.XZ.run() self.XZ holds the class XZ i added:
+
+          ┌────────────────────────────────────────────────┐
+          │ with open("kernel.miso", "wb") as f_out:       │
+          │     f_out.write(b'MISO') # Your LunerOS header │
+          │     f_out.write(final_data)                    │
+          └────────────────────────────────────────────────┘
+
+          and i runned it and nothing i then found out that there was no return in the 
+          compress function i added
+
+          ┌─────────────────────────────┐
+          │ return self.processed_chunk │
+          └─────────────────────────────┘
+
+          also edited the Lzma file i cant remember that so i kinda skiped it but i added 
+          a var to store the huffman output 
+
+          i ran it one more time and still nohting becuse the both wornet operating 
+          correctly and while loop runs before it compressed to fix that i thing i added 
+
+          ┌───────────────────────────────┐
+          │ data = self.Huffman.compress()│
+          └───────────────────────────────┘
+          and
+          ┌────────────────┐
+          │ self.f.close() │
+          └────────────────┘
+
+          then i changed 
+
+          ┌─────────────────────────────────┐
+          │ with open(self.file_path, 'rb') │
+          └─────────────────────────────────┘
+          to
+          ┌─────────────────────────────────┐
+          │ with open(self.file_path, 'wb') │
+          └─────────────────────────────────┘
+
+          and yet again a TypeError becuse the perameter needed byts not a file i fixed 
+          exactly that with
+
+          ┌──────────────────────────────────────────────────┐
+          │ self.compressed = self.compressor.compress(data) │
+          └──────────────────────────────────────────────────┘
+
+          FINALY the compresstion worked i checked the file size 
+
+          ┌──────────────┬────────────┐
+          │ uncompressed │ compressed │
+          ├──────────────┼────────────┤
+          │    509KB     │   404KB    |
+          └──────────────┴────────────┘
+
+          about a 20.6% reduction now we have one more thing the decompresor
+
+     ┌────────────╥────────────~,
+     | Sub part 2 ║ decompresor ]> ##>-
+     └────────────╨────────────────────────────────────────────────────────────────────────
+          
+          I started with moving the compressor to the folder 'compressor' and made a new 
+          folder 'decompresor' I did this so that i dont get cnfused that what is the 
+          compressor and decompresor i moved venv to the root in:
+  
+          ┌─┤Tree├───────────────────────────┐
+          |          .                       |
+          |          |                       |
+          |          ├─decompressor          |
+          |          |      |                |
+          |          |      ├─main.py        |
+          |          |      |                |
+          |          |      ├─Lzma.py        |
+          |          |      |                |
+          |          |      └─huffman.py     |
+          |          |                       |
+          |          ├─compressor            |
+          |          |     |                 |
+          |          |     ├─main.py         |
+          |          |     |                 |
+          |          |     ├─Lzma.py         |
+          |          |     |                 |
+          |          |     └─huffman.py      |
+          |          |                       |
+          |          └─venv                  |
+          └──────────────────────────────────┘
+
+     I got Gemini to filp the tree for huffman i could do
+
+          ┌────────────────────────────────────────────────┐
+          │ self.MAP = {v: k for k, v in self.MAP.items()} │
+          └────────────────────────────────────────────────┘
+     
+     but i writed the whoule tree becuse doing the programminf why would eat some of the 
+     speed. I got confussed of how to flip the compresstion so i googled "how to flip self.
+     processed_chunk.extend(self.MAP.get(byte, byte))' i got the result of fliping the map 
+     and doing value -> reversed_map -> byte sence i already did that i moved on checking 
+     the code again it should decompres it so i moved to the XZ compresstion i found out 
+     be my self that there was a lzma.LZMADecompressor() so i changed it to that i changed 
+     every compresstion and relitive names to decompres and there relitive names and c/
+     p'ed the header checking logic also added the breck keyword to the if-else statment 
+     also added the else logic by my self i sow and error that the breack keyword can be 
+     only used in a loop i thought i was in a while loop and found out that i was in a 
+     with keyword so i added import sys and i changed
+
+     ┌───────┐
+     │ break │
+     └───────┘
+     to
+     ┌────────────┐
+     │ sys.exit() │
+     └────────────┘
+
+     also added a return to the end of the write in the lzma file then i send every think 
+     to Gemini so if i have any errors it will catch them wich it did the first one is 
+     that i did'nt changed wb to rb wich would throu an error also the sequenc was also 
+     wrong becuse the logic had to read an write i googled "dose rwb exist in open 
+     keywords in pyton' it tould me that it dosent exit and you have to use rb+ or wb+ i 
+     chose wb+ i then changed the houl decompresor from python to rust then to realize 
+     that the os cant decompres itself so i made it back into python then i thought why 
+     not the image maker be the decompresor at the same time this would eleminate 
+     downloading tow things but i did'nt know how to do that but Gemini gave the code i 
+     checked it for any mistakes or code to change then named the util 'LunerOS-imager' 
+     name was inspiared by then rpi-imager util by raspbarry pi also now the compressor 
+     decompresor was the same thing so i made a new main.py in the root of the folder of 
+     the miso compresstion i tested the comesstion and decompresor and there was an eror 
+     in the decompresor the error told that there was a missing perameter self i checked 
+     the code and i found out that if forgot to use the vare insted i use the file's class 
+     in other words i dint call the init function afer fixing that i changed a few things 
+     and a TypeErroaccourd and it was saying that a byte-like object is needed not a _io.
+     BufferedReadei asked Gemini for the fix becuse i did'nt know how to type cast 
+     somthing to byts igave the ans and it also spoted a logic error that in the run 
+     function i need to read not write i gave me the file i c/p'ed and checked for other 
+     things it ran success fully and there was nothing in the decompresed file so i asked 
+     Gemini becuse i am not an expert at compresstion/decomprestion algorithems so one of 
+     the logic to wacth out was no return statment in lzma but there was a return statment 
+     so that is'nt the collprit and it gave a file again so i c/p'ed it and ran it 
+
+┌────────╥─────────────────────────────~,
+| Part 4 ║ costome testing framework )> ##>-
+└────────╨────────────────────────────────────────────────────────────────────────────────
+
+     i made a new file named testingframework.rs and added testingframework related code 
+     and i had 5 errors and the were:
+
+     1: main.rs 
+        can't find crate for `test`
+        can't find crate
+
+     2: testframework
+        custom test frameworks are an unstable feature
+        see issue #50297 <https://github.com/rust-lang/rust/issues/50297> for more 
+        information add `#![feature(custom_test_frameworks)]` to the crate attributes to 
+        enable this compiler was built on 2026-02-24; consider upgrading it if it is out 
+        of date
+     
+     3: testframework
+        the `#![feature]` attribute can only be used at the crate root
+        `#[warn(unused_attributes)]` (part of `#[warn(unused)]`) on by default
+
+     4: testframework
+        unused import: `crate::println`
+        `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+     
+     5: testframework
+        remove the whole `use` item
+     
+     first i tried debugging my self first tried removeing use in testframework and it 
+     backfired becuse println was dependent on it so i put it back then i tried importing 
+     lelite becuse it stored println macro and it backfired too so i deleted the mod line 
+     then i had an idea to import only println from lelite and it did'nt work i tried 
+     renaming the crate to test it dint work so i asked Gemini and it told that the #!
+     [feature(custom_test_frameworks)] and #![test_runner(crate::test)] are suppos to be 
+     in the top of main.rs, rust normaly tries linking to the test crate wich dosn't work 
+     becuse the std crates dont exist and the println can be accsessed only be exporting 
+     "crate::println" not importing "mod lelite" so i did the changes and it fixed all 
+     errors exept for one wich i fixed my self after that i ran it and it was the same as 
+     last time so i checked the titorial and it was correct so i moved on i added a 
+     trival_assertation function then i found out i need to run cargo test not cargo run i 
+     ran cargo test 
+     
+     there was an error it was that i could'nt compile spin and volitle 
+     due to duplicate land item wich the titorial warned me about and there was a note 
+     that there is a secend definition of core i asked Gemini becuse i did'nt know how to 
+     debug these kind of errors i read the output tried cargo clean did'nt work then i 
+     reloded vscode ran cargo clean it worked 
+
+     i ran cargo test it gave the same output 
+     bit there was only one error it could'nt compile spin also a warning that the build 
+     failed becuse there was a job runnning so i asked Gemini for ovusresoe i changed the 
+     [traget ...] line in config.toml also cleaned the buidl tree and nuked the target 
+     directry then ran rustup update 
+     
+     there was no target folder also ran cargo test 
+     --target x86_64-LunerOS.json and there were errors and the were similer to the 
+     previuse ones i asked Gemini and changed a dependency line in Cargo.toml and ran 
+     cargo update -p spin:0.5.2 --aggressive and it gave errors adn it had a single error 
+     that the package it specification spin@0.5.2 did not match i asked Gemini and ran 
+     cargo tree -i spin i ran cargo clean and run for no resone and it worked then i ran 
+     cargo test and 
+     
+     it had errors so i ran rm -rf target/ and cargo test --target 
+     x86_64-LunerOS.json -Z build-std=core,compiler_builtins same error alsmost changed 
+     test = true and ran rm -rf target/ and cargo test --test testframework -Z 
+     build-std=core,compiler_builtins --target x86_64-LunerOS.json and as usal an error 
+     the testframework is'nt in default-run i asked Gemini and i added doctest = false and 
+     changed test = false also i ran # Clean to remove the conflicting .rmeta files cargo 
+     clean and cargo test --target x86_64-LunerOS.json -Z build-std=core,compiler_builtins 
+     same error i changed some lins and it a werd error 
+     
+     i changed somthing and i ran cargo 
+     clean and an error i renamed main.rs to lib.rs i ran cargo clean nuked target/, 
+     CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUNNER="true" and cargo test --target 
+     x86_64-LunerOS.json -Z build-std=core,compiler_builtins an error but it was one only 
+     and it was that a .json is requird for specs (-Zjson-target-spec)
+     
+     i ran RUSTFLAGS="-Z unstable-options" cargo test --target x86_64-LunerOS.json -Z 
+     build-std=core,compiler_builtins wich gave yet another error the same one i ran cargo 
+     test --target x86_64-LunerOS.json \
+     -Z build-std=core,compiler_builtins \
+     -Z json-target-spec and an error 
+
+     i made a new directry tests made the file basic_boot.rs in it added some content in it 
+     also changed something in Cargo.toml and ran cargo test --target x86_64-LunerOS.json \
+     -Z build-std=core,compiler_builtins \
+     -Z json-target-spec
+     again an error what a suprise
+     i forgot to dociment the "ABI hell". i got frustrated so i thought why not write my 
+     own 
+
+     ┌────────────╥──────────~,
+     | Sub part 1 ║ Luner-ABI ]> ##>-
+     └────────────╨────────────────────────────────────────────────────────────────────────
+
+          i resurech for any titorials for making an abi but there wornt any so i had to 
+          use Gemini so i did exactly that it gave my some code and i realized that this is 
+          basicly asm but in rust i knew that becuse before i even started this project i 
+          drafed the layout for a costome hashing and encoding algorithems and it was 
+          mathamticly and verculy imposible to decode or was it and to make that happen i 
+          need speed so i started learning asm but i couldent make my first programe cuse i 
+          dint understaned syscalls but i knew what mov command and rissisteres were so i 
+          "technicly" unsrstanded asm so i made a file named "Luner-ABI.rs" and worght some 
+          asm/rust also it was very minimal and since no one used Luner ABI at the time i 
+          am writing this so it was safe unlike system v and onthers (mostly) also made 
+          some nots in ABI.txt you can see that file in the curent directry wich this file 
+          is and i forgot to document again also i have the first bug this 
+
+          ┌────────────────────────────────────────────────────────────────────────────────┐
+          │ Qemu                                                                     - █ X │
+          ├────────────────────────────────────────────────────────────────────────────────┤
+          │ SeaBIOS (version Arch Linux 1.17.0 Z-Z)                                        │
+          │ iPXE (http//ipxe.org) [some text]                                              │
+          │                                                                                │
+          │ Booting from Hard drive                                                        │
+          │ Booting first stage                                                            │
+          │ Booting second stage                                                           │
+          │                                                                                │
+          │                                                                                │
+          └────────────────────────────────────────────────────────────────────────────────┘
+
+          was printing clearing printing forever i asked Gemini and it turned out it was an instruction error basicly it was falting so fast that the cpu sayed i am done then it reset and falted again for ever and Gemini had the code for it i ran the c/p protocal (checking removing unessesary code and past) after som fixing it was working agian and there was nothing and why becuse i told the cpu to stay here and do noting forever so i did add some more code and it 

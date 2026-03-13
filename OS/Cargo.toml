@@ -1,0 +1,36 @@
+[package]
+name = "LunerOS"
+version = "0.1.0"
+edition = "2024"
+authors = ["Author Name <author@example.com>"]
+
+[package.metadata.bootimage]
+test-args = ["-device", "isa-debug-exit,iobase=0xf4,iosize=0x04"]
+
+[target.'cfg(target_arch = "x86_64")']
+rustflags = ["-C", "link-arg=-Tlinker.ld"]
+
+[dependencies]
+bootloader = { version = "0.9.34", default-features = false }
+spin = { version = "0.9.8", default-features = false, features = ["spin_mutex"] }
+volatile = { version = "0.2.7", default-features = false }
+
+[dev-dependencies]
+# This ensures that even during tests, these crates don't flip to 'std'
+scopeguard = { version = "1.2.0", default-features = false }
+
+[dependencies.lazy_static]
+version = "1.0"
+features = ["spin_no_std"]
+
+# the profile used for `cargo build`
+[profile.dev]
+panic = "abort" # disable stack unwinding on panic
+
+# the profile used for `cargo build --release`
+[profile.release]
+panic = "abort" # disable stack unwinding on panic
+
+[[bin]]
+name = "LunerOS"
+path = "src/lib.rs"
