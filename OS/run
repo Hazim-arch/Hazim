@@ -1,5 +1,16 @@
 #!/bin/bash
 
+case $1 in
+  -t)
+    cargo clean
+    cargo build
+    cargo test || echo "[<!>] an error happened"
+    
+    exit
+    ;;
+esac
+
+
 START_TIME=$SECONDS
 
 clear
@@ -37,3 +48,21 @@ echo "[+] executed in $DURATION s"
 echo '[+] running'
 
 qemu-system-x86_64 -drive format=raw,file=target/x86_64-LunerOS/debug/bootimage-LunerOS.bin -serial stdio
+
+echo "[+] do you want to run a debug? [y/n] or clean [c] or test [t]"
+read debig
+if [ $debig == "y" ]; then
+    blackhqemu-system-x86_64 -drive format=raw,file=target/x86_64-LunerOS/debug/bootimage-LunerOS.bin -d int,cpu_reset -no-reboot
+
+elif [ $debig == "c" ]; then
+    cargo clean
+    clear
+    exit
+
+elif [ $debig == "t" ]; then
+    cargo clear
+    cargo test
+    exit
+else
+    exit
+fi

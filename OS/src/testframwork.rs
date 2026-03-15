@@ -6,4 +6,6 @@ pub fn test_runner(tests: &[&dyn Fn()]) {
         test();
         crate::println!("[test-pass]");
     }
+
+    exit_qemu(QemuExitCode::Success);
 }

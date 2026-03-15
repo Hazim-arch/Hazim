@@ -4,6 +4,8 @@ use lazy_static::lazy_static;
 use spin::Mutex;
 
 #[allow(dead_code)]
+
+#[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(u8)]
 pub enum Color {
@@ -58,9 +60,9 @@ impl fmt::Write for Writer {
 }
 
 pub struct Writer {
-    pub column_position: usize,
+    column_position: usize,
     pub color_code: ColorCode,
-    pub buffer: &'static mut Buffer,
+    buffer: &'static mut Buffer,
 }
 
 lazy_static! {
@@ -72,10 +74,11 @@ lazy_static! {
 }
 
 impl Writer {
+    #![allow(dead_code)]
     pub fn clear_screen(&mut self) {
-        let blank = ScreenChar {
-            ascii_character: b' ',
-            color_code: self.color_code,
+      let blank = ScreenChar {
+        ascii_character: b' ',
+        color_code: self.color_code,
         };
         for row in 0..BUFFER_HEIGHT {
             for col in 0..BUFFER_WIDTH {
@@ -93,7 +96,7 @@ impl Writer {
                     self.new_line();
                 }
 
-                let row = BUFFER_HEIGHT - 1; // Always writes to the VERY LAST line (row 24)
+                let row = BUFFER_HEIGHT - 1;
                 let col = self.column_position;
 
                 let color_code = self.color_code;
@@ -133,9 +136,7 @@ impl Writer {
     pub fn write_string(&mut self, s: &str) {
         for byte in s.bytes() {
             match byte {
-                // printable ASCII byte or newline
                 0x20..=0x7e | b'\n' => self.write_byte(byte),
-                // not part of printable ASCII range
                 _ => self.write_byte(0xfe),
             }
         }

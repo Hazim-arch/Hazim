@@ -381,4 +381,54 @@ Make an OS that is universal and solve the bloat problum
           │                                                                                │
           └────────────────────────────────────────────────────────────────────────────────┘
 
-          was printing clearing printing forever i asked Gemini and it turned out it was an instruction error basicly it was falting so fast that the cpu sayed i am done then it reset and falted again for ever and Gemini had the code for it i ran the c/p protocal (checking removing unessesary code and past) after som fixing it was working agian and there was nothing and why becuse i told the cpu to stay here and do noting forever so i did add some more code and it 
+          was printing clearing printing forever i asked Gemini and it turned out it was an 
+          instruction error basicly it was falting so fast that the cpu sayed i am done 
+          then it reset and falted again for ever and Gemini had the code for it i ran the 
+          c/p protocal (checking removing unessesary code and past) after som fixing it was 
+          working agian and there was nothing and why becuse i told the cpu to stay here 
+          and do noting forever so i did add some more code and it did'nt work btw i added 
+          this version to my git repo now it was the same problum but it stopped clearing 
+          for a split second and it was back to clearing and printing i asked Gemini and it 
+          was a double falt loop so it gave a very percice _start code i did the c/p 
+          protocal and after some more debuging i finally got it fixed now for the test of 
+          the testing intigration
+
+     i fallowed the titorial and added some code to find out that the funtion 
+     "trival_assertation" was'nt called so i tried that and a scope error i then asked 
+     Gemini and it sayed that you dont need to so i ran cargo test and the double lang item 
+     error after some more debugging and fixing i managed to eleminate one of the errors 
+     but the spin one did'nt go and the core was compileing 2 times one fixing code later 
+     same thing. then i realized why not see what the titorials says and it worked every 
+     think is normal and ready for I/O porting
+
+          ┌────────────╥──────────~,
+          | Sub part 1 ║ I/O ports ]> ##>-
+          └────────────╨────────────────────────────────────────────────────────────────────
+
+          i first added x86_64 = "0.14.2" to the dependencies section in my Cargo.toml and added 
+          
+          ┌──────────────────────────────────────────────┐
+          | #[derive(Debug, Clone, Copy, PartialEq, Eq)] |
+          | #[repr(u32)]                                 |       
+          | pub enum QemuExitCode {                      |  
+          |     Success = 0x10,                          |
+          |     Failed = 0x11,                           |
+          | }                                            |
+          |                                              |
+          | pub fn exit_qemu(exit_code: QemuExitCode) {  |
+          |     use x86_64::instructions::port::Port;    |
+          |                                              |
+          |     unsafe {                                 |
+          |         let mut port = Port::new(0xf4);      |
+          |         port.write(exit_code as u32);        |
+          |     }                                        |
+          | }                                            |
+          └──────────────────────────────────────────────┘
+
+          to intrups/io_portingr.rs
+          and added
+
+          ┌───────────────────────────────────┐
+          | exit_qemu(QemuExitCode::Success); |
+          └───────────────────────────────────┘
+          to testframework.rs function test_runner
