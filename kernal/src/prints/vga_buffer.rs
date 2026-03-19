@@ -1,9 +1,9 @@
-use volatile::Volatile;
-use core::fmt;
 use lazy_static::lazy_static;
+use volatile::Volatile;
 use spin::Mutex;
-
-#[allow(dead_code)]
+use core::fmt;
+#[allow(unused_imports)]
+use crate::println;
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -28,66 +28,41 @@ pub enum Color {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-#[repr(transparent)]
-pub struct ColorCode(u8);
-
+struct ColorCode(u8);
 impl ColorCode {
-    pub fn new(foreground: Color, background: Color) -> ColorCode {
+    #[allow(dead_code)]
+    fn new(foreground: Color, background: Color) -> ColorCode {
         ColorCode((background as u8) << 4 | (foreground as u8))
     }
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-#[repr(C)]
 struct ScreenChar {
     ascii_character: u8,
     color_code: ColorCode,
 }
 
+#[allow(dead_code)]
 const BUFFER_HEIGHT: usize = 25;
+#[allow(dead_code)]
 const BUFFER_WIDTH: usize = 80;
 
 #[repr(transparent)]
-pub struct Buffer {
+#[allow(dead_code)]
+struct Buffer {
     chars: [[Volatile<ScreenChar>; BUFFER_WIDTH]; BUFFER_HEIGHT],
 }
 
-impl fmt::Write for Writer {
-    fn write_str(&mut self, s: &str) -> fmt::Result {
-        self.write_string(s);
-        Ok(())
-    }
-}
-
+#[allow(dead_code)]
 pub struct Writer {
     column_position: usize,
-    pub color_code: ColorCode,
+    color_code: ColorCode,
     buffer: &'static mut Buffer,
 }
 
-lazy_static! {
-    pub static ref WRITER: Mutex<Writer> = Mutex::new(Writer {
-        column_position: 0,
-        color_code: ColorCode::new(Color::Yellow, Color::Black),
-        buffer: unsafe { &mut *(0xb8000 as *mut Buffer) },
-    });
-}
-
 impl Writer {
-    #![allow(dead_code)]
-    pub fn clear_screen(&mut self) {
-      let blank = ScreenChar {
-        ascii_character: b' ',
-        color_code: self.color_code,
-        };
-        for row in 0..BUFFER_HEIGHT {
-            for col in 0..BUFFER_WIDTH {
-                self.buffer.chars[row][col].write(blank);
-            }
-        }
-        self.column_position = 0;
-    }
-
+    #[allow(dead_code)]
     pub fn write_byte(&mut self, byte: u8) {
         match byte {
             b'\n' => self.new_line(),
@@ -106,6 +81,18 @@ impl Writer {
                 });
                 self.column_position += 1;
             }
+        }
+    }
+
+    pub fn write_string(&mut self, s: &str) {
+        for byte in s.bytes() {
+            match byte {
+                // printable ASCII byte or newline
+                0x20..=0x7e | b'\n' => self.write_byte(byte),
+                // not part of printable ASCII range
+                _ => self.write_byte(0xfe),
+            }
+
         }
     }
 
@@ -131,15 +118,40 @@ impl Writer {
     }
 }
 
-impl Writer {
-    #![allow(dead_code)]
-    pub fn write_string(&mut self, s: &str) {
-        for byte in s.bytes() {
-            match byte {
-                0x20..=0x7e | b'\n' => self.write_byte(byte),
-                _ => self.write_byte(0xfe),
-            }
-        }
+impl fmt::Write for Writer {
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        self.write_string(s);
+        Ok(())
     }
 }
 
+lazy_static! {
+    pub static ref WRITER: Mutex<Writer> = Mutex::new(Writer {
+        column_position: 0,
+        color_code: ColorCode::new(Color::Yellow, Color::Black),
+        buffer: unsafe { &mut *(0xb8000 as *mut Buffer) },
+    });
+}
+
+#[doc(hidden)]
+pub fn _print(args: fmt::Arguments) {
+    use core::fmt::Write;
+    WRITER.lock().write_fmt(args).unwrap();
+}
+
+#[test_case]
+fn test_println_many() {
+    for _ in 0..200 {
+        println!("test_println_many output");
+    }
+}
+
+#[test_case]
+fn test_println_output() {
+    let s = "Some test string that fits on a single line";
+    println!("{}", s);
+    for (i, c) in s.chars().enumerate() {
+        let screen_char = WRITER.lock().buffer.chars[BUFFER_HEIGHT - 2][i].read();
+        assert_eq!(char::from(screen_char.ascii_character), c);
+    }
+}

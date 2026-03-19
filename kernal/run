@@ -1,0 +1,89 @@
+#!/bin/bash
+
+case $1 in
+  -t)
+    echo "${BOLD}[+]${NC} cleaning files"
+    cargo clean
+    echo "${GREEN}[+]${NC} runnning tests"
+    cargo test --target x86_64-LunerOS.json || echo "${RED}[<!>]${NC} ${BOLD}an error happened${NC}"
+    exit
+    ;;
+  -b)
+    echo "${BOLD}[+]${NC} cleaning files"
+    cargo clean
+    echo "${BOLD}[+]${NC} building tree"
+    cargo build --target x86_64-LunerOS.json
+    exit
+    ;;
+  -c)
+    echo "${BOLD}[+]${NC} cleaning files"
+    cargo clean
+    exit
+    ;;
+  --tree)
+    tree -L 3
+    exit
+    ;;
+  --cat) 
+    cat *
+    echo "\n"
+    exit
+    ;;
+esac
+
+START_TIME=$SECONDS
+
+clear
+
+echo -e "${GREEN}$(toilet -f mono12 runner)${NC}"
+echo "for LunerOS"
+
+echo "[+] initng"
+GREEN='\033[1;32m'
+RED='\033[31m'
+BOLD='\033[1m'
+NC='\033[0m'
+
+echo "${BOLD}[+]${NC} cleaning files"
+cargo clean
+
+echo "${BOLD}[+]${NC} building tree"
+cargo build --target x86_64-LunerOS.json
+if ! cargo build --target x86_64-LunerOS.json; then
+    echo "${RED}[<!>]${NC} error: build failed"
+    fahh
+    exit 1
+else
+    echo "${GREEN}[+]${NC} seccess"
+    exit
+fi
+echo "[+] making bootimage"
+cargo bootimage
+
+DURATION=$(( SECONDS - START_TIME ))
+echo "[+] executed in $DURATION s"
+sleep 0.1
+
+echo '[+] running'
+
+qemu-system-x86_64 -drive format=raw,file=target/x86_64-LunerOS/debug/bootimage-LunerOS.bin -serial stdio
+
+echo "[+] do you want to run a debug? [y/n] or clean [c] or test [t]"
+read debig
+if [ $debig == "y" ]; then
+    qemu-system-x86_64 -drive format=raw,file=target/x86_64-LunerOS/debug/bootimage-LunerOS.bin -d int,cpu_reset -no-reboot
+    exit
+
+elif [ $debig == "c" ]; then
+    cargo clean
+    clear
+    exit
+
+elif [ $debig == "t" ]; then
+    cargo clear
+    cargo test
+    exit
+else
+    echo "[+] ok :D"
+    exit
+fi
