@@ -19,7 +19,6 @@ pub fn _print(args: ::core::fmt::Arguments) {
 
 //sprint
 
-
 #[macro_export]
 macro_rules! serial_print {
     ($($arg:tt)*) => {

@@ -1,5 +1,5 @@
 #[allow(unused_imports)]
-use crate::{serial_println, serial_print, println};
+use crate::{serial_println, serial_print, println, prints, PanicInfo, qemu};
 
 #[cfg(test)]
 pub fn test_runner(tests: &[&dyn Testable]) {
@@ -33,7 +33,23 @@ where
     }
 }
 
+// testing
 #[test_case]
-fn test_println_simple() {
-    println!("test_println_simple output");
+fn test_println_output() {
+    let s = "Some test string that fits on a single line";
+    println!("{}", s);
+    for (i, c) in s.chars().enumerate() {
+        let screen_char = prints::vga_buffer::WRITER.lock().buffer.chars[prints::vga_buffer::BUFFER_HEIGHT - 2][i].read();
+        assert_eq!(char::from(screen_char.ascii_character), c);
+    }
+}
+
+
+#[cfg(test)]
+#[panic_handler]
+fn panic(info: &PanicInfo) -> ! {
+    serial_println!("[failed]\n");
+    serial_println!("Error: {}\n", info);
+    qemu::exit_qemu(qemu::QemuExitCode::Failed);
+    loop {}
 }

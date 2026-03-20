@@ -23,15 +23,6 @@ pub extern "C" fn _start() -> ! {
     loop {}
 }
 
-#[cfg(test)]
-#[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
-    serial_println!("[failed]\n");
-    serial_println!("Error: {}\n", info);
-    qemu::exit_qemu(qemu::QemuExitCode::Failed);
-    loop {}
-}
-
 #[cfg(not(test))]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {

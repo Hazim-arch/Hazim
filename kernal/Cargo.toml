@@ -27,3 +27,7 @@ name = "LunerOS"
 path = "src/main.rs"
 test = true
 bench = false
+
+[[test]]
+name = "should_panic"
+harness = false
