@@ -3,29 +3,18 @@
 #![feature(custom_test_frameworks)]
 #![test_runner(crate::test_runner)]
 #![reexport_test_harness_main = "test_main"]
+#![feature(abi_x86_interrupt)]
 
-use core::panic::PanicInfo;
-mod qemu;
-pub mod prints;
-#[macro_use]
-mod lelite;
+pub mod error_logs;
+pub mod luner_abi;
+pub mod exeptions; 
+pub mod testing;
+pub mod lelite;
+pub mod qemu;
+#[allow(non_snake_case)]
+pub mod IO;      
 
-pub trait Testable {
-    fn run(&self) -> ();
-}
-
-impl<T> Testable for T
-where
-    T: Fn(),
-{
-    fn run(&self) {
-        serial_print!("{}...\t", core::any::type_name::<T>());
-        self();
-        serial_println!("[ok]");
-    }
-}
-
-pub fn test_runner(tests: &[&dyn Testable]) {
+pub fn test_runner(tests: &[&dyn testing::Testable]) {
     serial_println!("Running {} tests", tests.len());
     for test in tests {
         test.run();
@@ -33,24 +22,28 @@ pub fn test_runner(tests: &[&dyn Testable]) {
     qemu::exit_qemu(qemu::QemuExitCode::Success);
 }
 
-pub fn test_panic_handler(info: &PanicInfo) -> ! {
-    serial_println!("[failed]\n");
-    serial_println!("Error: {}\n", info);
-    qemu::exit_qemu(qemu::QemuExitCode::Failed);
-    loop {}
+pub fn init() {
+    exeptions::GDT::init();
+    exeptions::IDT::init_idt();
+    unsafe { exeptions::PIC::PICS.lock().initialize() };
+    x86_64::instructions::interrupts::enable();
 }
 
-/// Entry point for `cargo test`
+pub fn hlt_loop() -> ! {
+    loop {
+        x86_64::instructions::hlt();
+    }
+}
+
 #[cfg(test)]
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
+    init();
     test_main();
-    unsafe {
-        luner_abi::check_luner_abi();
-    }
-    loop {}
+    hlt_loop();  
 }
 
+// needed for basic_boot.rs
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(u32)]
 pub enum QemuExitCode {

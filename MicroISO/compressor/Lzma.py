@@ -1,4 +1,4 @@
-import lzma
+import lzma 
 
 class XZ:
     def __init__(self, f):

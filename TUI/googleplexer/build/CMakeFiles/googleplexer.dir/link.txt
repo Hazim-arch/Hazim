@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/googleplexer.dir/link.d CMakeFiles/googleplexer.dir/src/main.c.o -o googleplexer

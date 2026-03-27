@@ -30,7 +30,7 @@ class DeHuffman:
             if not self.chunk:
                 break
 
-    def compress(self, data):
+    def compress(self):
         self.file.seek(0)
         while True:
             self.chunk = self.file.read(self.chunk_size)

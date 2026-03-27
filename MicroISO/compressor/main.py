@@ -1,5 +1,5 @@
 import os
-from Lzma import XZ
+from .Lzma import XZ
 from huffman import Huffman
 import sys
 

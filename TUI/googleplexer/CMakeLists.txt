@@ -1,26 +1,15 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.10)
+project(googleplexer C)
 
-# Force the compiler path (Standard Arch location)
-set(CMAKE_C_COMPILER "/usr/bin/gcc")
-set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
+set(CMAKE_C_STANDARD 11)
 
-# Initialize project WITHOUT languages first
-project(googleplexer NONE) 
+find_package(PkgConfig REQUIRED)
 
-# Now enable C manually
-enable_language(C)
+file(GLOB_RECURSE SOURCES "src/*.c")
 
-set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_SYSTEM_PROCESSOR x86_64)
+add_executable(googleplexer ${SOURCES})
 
-add_library(googleplexer STATIC 
-    src/display/screen/screen.c
-    src/print_driver/print_driver.c 
-    )
 
-target_compile_options(googleplexer PRIVATE 
-    -ffreestanding 
-    -nostdlib 
-    -fno-stack-protector 
-    -mno-red-zone
+target_include_directories(googleplexer PRIVATE 
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
 )

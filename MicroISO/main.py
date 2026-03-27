@@ -1,10 +1,13 @@
 from decompressor.main import Decomporessor
-import subprocess
 import os
 
 class MAIN:
     def __init__(self):
-        print("Enter miso file")
+        CLEAR = print("\033[2J")
+        RESET = "\033[0m"
+        print("\033[40m")
+        print("\033[H")
+        print("\033[1;32m[+]\033[1m Enter miso file \033[0m")
         self.input = input("")
         self.decompressor = Decomporessor(self.input)
 
@@ -41,4 +44,4 @@ class MAIN:
             print(f"[!] Flash Failed: {e}")
 
 if __name__ == "__main__":
-    app = MAIN
+    app = MAIN()

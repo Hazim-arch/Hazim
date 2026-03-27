@@ -26,5 +26,5 @@ fn test_println() {
 
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
-    luner_os::test_panic_handler(info)
+    luner_os::testing::test_panic_handler(info)
 }

@@ -1,6 +1,6 @@
 import os
-from Lzma import DeXZ
-from huffman import DeHuffman
+from .Lzma import DeXZ
+from .huffman import DeHuffman
 import sys
 
 class Decomporessor:
