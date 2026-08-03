@@ -1,5 +1,3 @@
-use crate::IO::Output::serial::SERIAL1;
-
 #[macro_export]
 macro_rules! print {
     ($($arg:tt)*) => {
@@ -11,14 +9,6 @@ macro_rules! print {
 macro_rules! println {
     () => ($crate::print!("\n"));
     ($($arg:tt)*) => ($crate::print!("{}\n", format_args!($($arg)*)));
-}
-
-//sprint
-
-#[doc(hidden)]
-pub fn _print(args: ::core::fmt::Arguments) {
-    use core::fmt::Write;
-    SERIAL1.lock().write_fmt(args).expect("Printing to serial failed");
 }
 
 #[macro_export]

@@ -1,79 +1,98 @@
 #!/bin/bash
 
-DESABLED= false
+echo -e "\033[1;32m[+]\033[1m initng\033[0m"
+GREEN='\033[1;32m'
+RED='\033[1;31m'
+BOLD='\033[1m'
+NC='\033[0m'
+DESABLED=false
 
 case $1 in
-  -t)
-    echo -e "${BOLD}[+]${NC} cleaning files"
+  -t|--test|test)
+    echo -e "${GREEN}[+]${NC}${BOLD} cleaning files${NC}"
     cargo clean
-    echo -e "${GREEN}[+]${NC} runnning tests"
-    cargo test --target x86_64-LunerOS.json || echo -e -e "${RED}[<!>]${NC} ${BOLD}an error happened${NC}"
+
+    echo -e "${GREEN}[+]${NC} runnning tests${NC}"
+    cargo test --target x86_64-LunerOS.json || echo -e -e "${RED}[<!>]${BOLD}an error happened${NC}"
     exit
     ;;
-  -b)
-    echo -e "${BOLD}[+]${NC} cleaning files"
+  -b|--build|build)
+    echo -e "${GREEN}[+]${NC}${BOLD} cleaning files${NC}"
     cargo clean
-    echo -e "${BOLD}[+]${NC} building tree"
+
+    echo -e "${GREEN}[+]${NC}${BOLD} building tree${NC}"
     cargo build --target x86_64-LunerOS.json
+    if ! cargo build --target x86_64-LunerOS.json; then
+        echo -e "${RED}[<!>]${NC} error: build failed${NC}"
+        fahh
+        exit 1  
+    else
+        echo -e "${GREEN}[+]${NC} seccess${NC}"
+    fi
     exit
     ;;
-  -c)
-    echo -e "${BOLD}[+]${NC} cleaning files"
+  -c|--clear|clear)
+    echo -e "${GREEN}[+]${NC}${BOLD} cleaning files${NC}"
     cargo clean
     exit
     ;;
-  -e)
-    echo -e "${BOLD}[+]${NC} extras are desabled"
-    DESABLED= true
+  -e|--Dextra|Dextra)
+    echo -e "${GREEN}[+]${NC}${BOLD} extras are desabled${NC}"
+    DESABLED=true
     ;;
-  --tree)
+  -tr|--tree|tree)
     tree -L 3
     exit
     ;;
-  --cat) 
+  -ct|--cat|cat) 
     cat *
     echo -e "\n"
     exit
     ;;
-esac
+  -bt|--bootimage|bootimage)
+    echo -e "${GREEN}[+]${NC}${BOLD} making bootimage${NC}"
+    cargo bootimage
+    exit
+    ;;
+  -h|--help|help)
+    echo "
+    LunerOS runner (for development perposes)
 
-START_TIME=$SECONDS
+    usage:  run <operations> 
+    operations:
+      -t|--test|test            execute code under #[test] or in test file
+      -b|--build|build)         cleans and builds file tree with targetx86_64-LunerOS.json
+      -c|--clear|clear          clears file tree
+      -e|--Dextra|Dextra        desables extras (run a debug? [y/n] or clean [c] or test)
+      -tr|--tree|tree           outputs the file tree with in 3 layer depth
+      -ct|--cat|cat             outputs the content of every file in the current tree
+      -bt|--bootimage|bootimage creats a bootable image
+      -h|--help|help            desplays this help massage
+    "
+esac
 
 clear
 
 echo "${GREEN}$(toilet -f mono12 runner)${NC}"
 echo "for LunerOS"
 
-echo -e "${BOLD}[+]${NC} initng"
-GREEN='\033[1;32m'
-RED='\033[31m'
-BOLD='\033[1m'
-NC='\033[0m'
-
-echo -e "${BOLD}[+]${NC} cleaning files"
+echo -e "${GREEN}[+]${NC}${BOLD} cleaning files${NC}"
 cargo clean
 
-echo -e "${BOLD}[+]${NC} building tree"
-cargo build --target x86_64-LunerOS.json
-if ! cargo build --target x86_64-LunerOS.json; then
-    echo -e "${RED}[<!>]${NC} error: build failed"
-    fahh
-    exit 1
-else
-    echo -e "${GREEN}[+]${NC} seccess"
-fi
-echo -e "${BOLD}[+]${NC} making bootimage"
-cargo bootimage
+START_TIME=$SECONDS
+
+echo -e "${GREEN}[+]${NC}${BOLD} building file tree${NC}"
+cargo build
 
 DURATION=$(( SECONDS - START_TIME ))
-echo -e "${BOLD}[+]${NC} executed in $DURATION s"
-sleep 0.1
+echo -e "${GREEN}[+]${NC}${BOLD} executed in $DURATION s${NC}"
+sleep 0.5
 
-echo -e '${BOLD}[+]${NC} running'
-cargo run
+echo -e "${GREEN}[+]${NC}${BOLD} running${NC}"
+`qemu-system-x86_64 -drive format=raw,file=target/x86_64-LunerOS/debug/bootimage-luner_os_bin.bin`
 
 if [[ $DESABLED ]]; then
-    echo -e "${BOLD}[+]${NC} do you want to run a debug? [y/n] or clean [c] or test [t]"
+    echo -e "${GREEN}[+]${NC}${BOLD} do you want to run a debug? [y/n] or clean [c] or test [t]${NC}"
     read debig
     if [ $debig == "y" ]; then  
         qemu-system-x86_64 -drive format=raw,file=target/x86_64-LunerOS/debug/bootimage-LunerOS.bin -d int,cpu_reset -no-reboot
@@ -89,7 +108,7 @@ if [[ $DESABLED ]]; then
         cargo test
         exit
     else  
-        echo -e "${BOLD}[+]${NC} ok :D"
+        echo -e "${GREEN}[+]${NC}${BOLD} ok :D${NC}"
         exit
     fi
 fi

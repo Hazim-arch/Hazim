@@ -2,6 +2,8 @@ use lazy_static::lazy_static;
 use volatile::Volatile;
 use spin::Mutex;
 use core::fmt;
+use x86_64::instructions::interrupts;
+
 #[allow(unused_imports)]
 use crate::println;
 
@@ -136,5 +138,7 @@ lazy_static! {
 #[doc(hidden)]
 pub fn _print(args: fmt::Arguments) {
     use core::fmt::Write;
-    WRITER.lock().write_fmt(args).unwrap();
+    interrupts::without_interrupts(|| {
+        WRITER.lock().write_fmt(args).unwrap();
+    });
 }

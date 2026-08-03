@@ -5,13 +5,25 @@
 #![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
-use luner_os::println;
+use bootloader::BootInfo;
+use luner_os::{println, memory, memory::allocs::allocator};
 
-#[unsafe(no_mangle)] 
-pub extern "C" fn _start() -> ! {
+#[cfg(test)]
+#[unsafe(no_mangle)]
+pub extern "C" fn _start(boot_info: &'static BootInfo) -> ! {
+    luner_os::init(); // Load GDT/IDT
+    
+    // TESTS NEED THE HEAP TOO!
+    let phys_mem_offset = x86_64::VirtAddr::new(boot_info.physical_memory_offset);
+    let mut mapper = unsafe { memory::PT::init(phys_mem_offset) };
+    let mut frame_allocator = unsafe {
+        memory::allocs::framalloc::BootInfoFrameAllocator::init(&boot_info.memory_map)
+    };
+    allocator::init_heap(&mut mapper, &mut frame_allocator)
+        .expect("Heap init failed in tests");
+
     test_main();
-
-    loop {}
+    luner_os::hlt_loop();
 }
 
 #[allow(dead_code)]

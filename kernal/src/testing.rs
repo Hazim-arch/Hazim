@@ -9,6 +9,7 @@ pub fn test_runner(tests: &[&dyn Testable]) {
     serial_println!("Running {} tests", tests.len());
     for test in tests {
         test.run();
+        serial_println!("[ok]");
     }
 
     crate::qemu::exit_qemu(crate::qemu::QemuExitCode::Success);
@@ -81,4 +82,5 @@ pub fn test_panic_handler(info: &PanicInfo) -> ! {
 fn test_breakpoint_exception() {
     println!("testing exeption handlers");
     x86_64::instructions::interrupts::int3();
+    println!("done");
 }

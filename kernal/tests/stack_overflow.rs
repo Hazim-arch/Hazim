@@ -2,9 +2,8 @@
 #![no_main]
 #![feature(abi_x86_interrupt)]
 use lazy_static::lazy_static;
-use x86_64::structures::idt::InterruptDescriptorTable;
+use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame};
 use luner_os::{exit_qemu, QemuExitCode, serial_println, serial_print};
-use x86_64::structures::idt::InterruptStackFrame;
 use core::panic::PanicInfo;
 
 // exeption handlers

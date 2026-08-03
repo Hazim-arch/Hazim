@@ -28,9 +28,79 @@ Make an OS that is universal and solve the bloat problum
                                    | Story (main) |
                                    └──────────────┘
                                         /────\
-                       /┌────────────────────────────────────┐\
-───────────────────────<┤ rise of Ceres (v0.2 beta) TRAPPIST-1├>───────────────────────────
-                       \└────────────────────────────────────┘/
+          /┌───────────────────────────────────────────────────────────┐\
+──────────<┤ LunerOS Ceres (v0.3 beta) Jupeter: king of managing chose ├>───────────────────
+          \└───────────────────────────────────────────────────────────┘/
                                         \────/
 
-     i just fallowed the titorial of phillip opermann. when i got to the double falt part and when i made the double falt it's behaver was the same flickering as the douplected lang error's behaver. then i moved on then the stack overflow's baehavier was the same flickering after i fallowed more of it and i had a bug that the it was;nt printing "." every frame and the problume has that i did'nt add luner_os::init(); to main.rs's _start funciton
+     i just fallowed the titorial of phillip opermann. and this time i am going to try to 
+     document every thing. so i created a folder named memory and added the file PT.rs 
+     (Paging Table) and i googled how to enabel file tabs cuz i accsedentaly desabled that 
+     i tried Ctrl+Alt+W witch did'nt work so i tried the manual not toggling way i pressed 
+     Ctrl+Shift+P and typed view: toggle tab and there was no option for that and then i 
+     tried Ctrl+Shift+W to find out that it closed the window and spamed Ctrl+Shift+P. i 
+     googled how to enabel file tabs in vsdcoe and i typed Ctrl+,then i typed tabs and tab 
+     and ticked hightlight modified tabs and set show tabs to multipule and there was the 
+     file tabs. i then made a file named memory.rs in the root and added pub mod PT; and 
+     fallowed the titorial will spliting the memory managment code into seprete files in 
+     memory file. i found out that you can do this use x86_64::{ 
+     structures::paging::PageTable, VirtAddr, }; so i changed some import syntex to 
+     that and i continued the titorial also i was reading the book Operating System In 
+     three simple peces it is a good book. i coulded find were to but this
+
+     ┌──────────────────────────────────────────────────────────────────┐
+     │ if !entry.is_unused() {                                          │
+     │     println!("L4 Entry {}: {:?}", i, entry);                     │
+     │                                                                  │
+     │     // get the physical address from the entry and convert it    │
+     │     let phys = entry.frame().unwrap().start_address();           │
+     │     let virt = phys.as_u64() + boot_info.physical_memory_offset; │
+     │     let ptr = VirtAddr::new(virt).as_mut_ptr();                  │
+     │     let l3_table: &PageTable = unsafe { &*ptr };                 │
+     │                                                                  │
+     │     // print non-empty entries of the level 3 table              │
+     │     for (i, entry) in l3_table.iter().enumerate() {              │
+     │         if !entry.is_unused() {                                  │
+     │                  println!("  L3 Entry {}: {:?}", i, entry);      │
+     │         }                                                        │
+     │     }                                                            │
+     │ }                                                                │
+     └──────────────────────────────────────────────────────────────────┘
+
+     i asked ai and i got the ans and i continued. i made a file named TransAddrs.rs and 
+     added the translation address code adn i deleted it when the titorial saied to adn i 
+     also created a file named framalloc.rs which i will add the fram allocator to also i 
+     made a file named mappr.rs (mappr becuse if i name it mapper i would have issues with 
+     the trait and the file) this is to hold the dummy create_mapper function and i moved 
+     on with the titorial. i had the error 
+
+     ┌─────────────────────────────────────────────────────────────────────────────────────┐
+     │ the trait bound `EmptyFrameAllocator:                                               │
+     │ FrameAllocator<x86_64::structures::paging::Size4KiB>` is not satisfied              │
+     │ the trait `FrameAllocator<x86_64::structures::paging::Size4KiB>` is not implemented │
+     │ for `EmptyFrameAllocator`                                                           │
+     └─────────────────────────────────────────────────────────────────────────────────────┘
+
+     i asked Gemini cuz i never got that error till now and to find out that it was in the titorial and i 
+     added to the kernal and i continued. and the resone is becuse i was editing the older version of luner 
+     i moved to the one with all the progress and continued. i had that same baehavier again i asked Gemini 
+     and it suggested it was the allocator returing null but befour that i tried using the ./run -t (runnes 
+     cargo clean and cargo test) and it had the error of not having a panic handelet after some suffering it 
+     was back again with out the allocator. i moved on but i only added the allocator after it was fully 
+     done. so i had some bug or deadloack that there was only Hello world ptinted and the new page creation 
+     message nothing else so first i rechecked the code that i had'nt missed anything. i missed somthing i 
+     added that and the same thing but with 2 Hello world being printed i tried again this time there was no 
+     secoed hello world and the kernal painc message was allmost printed i tried again this time i added 
+     message to the error message also moved them to the top and an error so i removed the message block and 
+     ran it. the samthing but suspicusly it stoped where the info was printed i tried yet another time and 
+     it gave the massage suppostly the error was happaning at /home/<my username>/.rustup/toolchains/
+     nightly-x86_64-unknown-linux-gnu/lib/src/rust/library/src/alloc.rs:572:9 aka in file alloc.rs at 573:9 
+     so i asked Gemini and it gave me a fixed copy of allocator.rs i c/p protocalled and it showed more info 
+     on the eror it was pritiy much the same but there was the text. after some testing costrastophy of the 
+     RSP rigister not workign and the code not giving a qemu succsess code not exiting the tesing was fixed. 
+     i cam back after winning the maritime proccess engenering day (2026) with 3ed place even thou my 
+     project the USU did'nt work. then i got no laptop for estemte 3 months but now i am back again. well i 
+     had to have some fun and also my hyperfocus for osdev was'nt there so i had to build it up from going 
+     hight level to low level so after about 4-5 months i have regain the hyperfocus and now i am back also 
+     i had lots of fun in pakistan i when to fista and wild venture. i changed the importing to use mod 
+     files insted of the same name pointer file thing

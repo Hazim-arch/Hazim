@@ -6,6 +6,7 @@ use core::panic::PanicInfo;
 pub fn MENTALOSBREAKDOWN(info: &PanicInfo) -> ! {
     println!("error code: 666");
     println!("       Mental OS Breakdown \n");
+    println!(" panic at: {}\n", info);
     println!("  a kernal panic or blue screen");
     println!("     of death has occered \n");
     println!(" you have three options:");
@@ -13,6 +14,5 @@ pub fn MENTALOSBREAKDOWN(info: &PanicInfo) -> ! {
     println!(" the devs at luneros.org \n");
     println!(" run onbored system repair\n");
     println!(" chroot into the OS\n");
-    println!(" panic at: {}\n", info);
     loop {};
 }

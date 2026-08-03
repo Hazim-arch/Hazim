@@ -11,18 +11,17 @@
 └─────────────────────────────────────────────────────────────────────────────────────────┘
 
 Name: LunerOS
-version: v0.1 beta    
+version: v0.3 beta    
 version name: Ceres 
-overviwe: blackhole
+overview: Jupiter
 
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│ Feacher list:                                                                           │
-│    1: MicroISO                                                                          │
+│ Feature list:                                                                           │
+│    1: multitasking                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│ Feacher explanation:                                                                    │
-| 1: MicroISO                                                                             |
-|    Compretion algorithem, uses huffman for binary and XZ(lzma) for the rest and is      |
-|    Made in to a file .miso                                                              |
+│ Feature explanation:                                                                    │
+| 1: multitasking                                                                         |
+|    comperitive and preemitive multitasking implimentation and switching for             |
 └─────────────────────────────────────────────────────────────────────────────────────────┘
