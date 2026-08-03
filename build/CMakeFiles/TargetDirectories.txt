@@ -1,3 +1,0 @@
-/home/sirdevhazim/Projects/officals/LunerOS/LunerOS-Ceres (v0.3 beta) Jupiter/build/CMakeFiles/googleplexer.dir
-/home/sirdevhazim/Projects/officals/LunerOS/LunerOS-Ceres (v0.3 beta) Jupiter/build/CMakeFiles/edit_cache.dir
-/home/sirdevhazim/Projects/officals/LunerOS/LunerOS-Ceres (v0.3 beta) Jupiter/build/CMakeFiles/rebuild_cache.dir
